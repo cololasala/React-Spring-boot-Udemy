@@ -1,0 +1,19 @@
+Se usa Vite -> npm create vite@latest
+Luego se hace npm install, y por ultimo para levantar el comando npm run dev
+
+En intro-react se instalo -> npm i prop-types
+----------------------------------------------
+En 04-cart-app ->  npm i react-router-dom
+
+si en una llamada por ejemplo -> addUser={() => addUser()}, ahi no tenemos "argumentos" entonces podria 
+ponerse addUser={addUser}
+cuando hacemos onClick de un button deberia usarse con parentesis -> onClick={() => removeUser()}
+
+----------------------------------------------
+En 05-users-app -> npm install sweetalert2 sweetalert2-react-content
+https://sweetalert2.github.io/
+
+Con sweetalert2-react-content, nos permite manejar el modal usando react (en este caso no lo usamos).
+
+En la carpeta pages ponemos los componentes contenedores. En auth los componentes de login.
+En la carpeta services se trata de poner funciones tipo "helpers", para que puedan ser reutilizadas en la app.
