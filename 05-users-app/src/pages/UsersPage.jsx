@@ -1,20 +1,10 @@
 import { UsersList } from "../components/UsersList";
-import { useUsers } from "../hooks/useUsers";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UserModalForm } from "../components/UserModalForm";
+import { UserContext } from "../context/userContext";
 
 export const UsersPage = () => {
-  //hook encargado de manejar los usuarios de la app
-  const {
-    users,
-    initForm,
-    selectedUser,
-    addUser,
-    removeUser,
-    onUpdate,
-    setSelectedUser,
-  } = useUsers();
-
+  const { users, initForm, setSelectedUser, onUpdate } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos
   const [openModal, setOpenModal] = useState(false);
 
   const onCloseModal = () => {
@@ -34,21 +24,10 @@ export const UsersPage = () => {
         Add user
       </button>
 
-      {openModal && (
-        <UserModalForm
-          initForm={initForm}
-          addUser={addUser}
-          selectedUser={selectedUser}
-          onCloseModal={onCloseModal}
-        />
-      )}
+      {openModal && <UserModalForm onCloseModal={onCloseModal} />}
 
       {users.length > 0 ? (
-        <UsersList
-          users={users}
-          onUpdate={onUpdateUser}
-          onRemove={removeUser}
-        />
+        <UsersList onUpdate={onUpdateUser} />
       ) : (
         <div className="alert alert-warning text-center mt-2">
           There are no registered users in the system

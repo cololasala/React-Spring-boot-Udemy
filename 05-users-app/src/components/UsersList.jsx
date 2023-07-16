@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { UserRow } from "./UserRow";
+import { UserContext } from "../context/userContext";
 
-export const UsersList = ({ users = [], onRemove, onUpdate }) => {
+export const UsersList = ({ onUpdate }) => {
+  const { users = [] } = useContext(UserContext);
   return (
     <>
       <h3 className="mt-2">Users table</h3>
@@ -16,9 +18,7 @@ export const UsersList = ({ users = [], onRemove, onUpdate }) => {
         </thead>
         <tbody>
           {users.map((u) => {
-            return (
-              <UserRow key={u.id} user={u} onUpdate={() => onUpdate(u)} onRemove={() => onRemove(u)}/>
-            );
+            return <UserRow key={u.id} user={u} onUpdate={onUpdate}/>;
           })}
         </tbody>
       </table>

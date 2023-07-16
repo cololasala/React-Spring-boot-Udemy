@@ -17,3 +17,15 @@ Con sweetalert2-react-content, nos permite manejar el modal usando react (en est
 
 En la carpeta pages ponemos los componentes contenedores. En auth los componentes de login.
 En la carpeta services se trata de poner funciones tipo "helpers", para que puedan ser reutilizadas en la app.
+
+Context:
+Context es un componente proveedor que se encuentra arriba en el arbol de componentes y permite compartir el estado actualizado
+a sus componentes hijos.Utiliza reducers. 
+Mediante el hook useContext podemos acceder al estado actualizado. 
+
+Pasos para crear un context:
+1-Creamos un context -> en mi ejemplo llamado UserContext donde usamos el createContext.
+2-Creamos provider -> en mi ejemplo llamado UserProvider que utiliza los hooks que definimos y se pasaran sus cosas a los hijos mediante el value.
+3-Con el tag UserProvider engrapamos todos los componentes hijos, en este caso sera en UsersRoutes (que es el componente de mayor jerarquia).
+4-A partir de ahora todos los componentes engrapados tendran acceso a lo que habiamos puesto en el "value" del UserProvider.
+5-La manera de acceder es mediante el hook useContext pasandole el context creado en este caso -> useContext(UserContext).

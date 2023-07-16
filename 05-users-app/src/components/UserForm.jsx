@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/userContext";
 
-export const UserForm = ({ initForm, userUpdate, addUser, closeForm }) => {
+export const UserForm = ({ userUpdate, closeForm }) => {
+  const { initForm, addUser } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos 
   const [formData, setFormData] = useState(initForm);
   const { id, userName, email, password } = formData;
 
@@ -69,6 +71,7 @@ export const UserForm = ({ initForm, userUpdate, addUser, closeForm }) => {
           <button
             type="submit"
             className="primary-button"
+            style={{ opacity: isDisabled() ? 0.65 : 1 }}
             disabled={isDisabled()}
           >
             {id !== 0 ? "Update" : "Create"}

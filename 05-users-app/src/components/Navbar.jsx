@@ -1,9 +1,10 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../auth/context/AuthContext";
 
-export const Navbar = ({login, handleLogout }) => {
-  const navigate = useNavigate();
+export const Navbar = () => {
+  const { login, handleLogout } = useContext(AuthContext);
 
   const onLogout = () => {
     Swal.fire({
@@ -24,14 +25,17 @@ export const Navbar = ({login, handleLogout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <h4>
-          User {login.user.username}
-        </h4>
+        <h4>User {login.user.username}</h4>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to={"/users"}>
                 Users
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to={"users/register"}>
+                Register user
               </NavLink>
             </li>
           </ul>
