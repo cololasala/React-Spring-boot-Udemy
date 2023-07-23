@@ -1,6 +1,10 @@
-import { products } from "../data/products";
+// import { products } from "../data/products";
 
-export const getProducts = () => products;
+export const getProducts = async () => {
+  const response = await fetch('http://localhost:8080/api/v1/products');
+  const products = await response.json();
+  return products;
+};
 
 export const calcuateCartTotal = (cartProducts) => {
   return cartProducts
