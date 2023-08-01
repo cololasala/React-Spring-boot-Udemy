@@ -5,12 +5,15 @@ export const loginReducer = (state = {}, action) => {
     case loginReducerActions.Login: {
       return {
         isAuth: true,
-        user: action.payload,
+        admin: action.payload.admin,
+        user: action.payload.user,
       };
     }
     case loginReducerActions.Logout: {
       return {
         isAuth: false,
+        admin: false,
+        user: undefined,
       };
     }
 

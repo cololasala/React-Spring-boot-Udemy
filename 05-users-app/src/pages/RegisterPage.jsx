@@ -4,11 +4,12 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 
 export const RegisterPage = () => {
-  const { users = [], initForm } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos 
+  const { users = [], initForm, setErrors } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos 
   const [selectedUser, setSelectedUser] = useState(initForm);
   const navigate = useNavigate();
 
   const goToUsers = () => {
+    setErrors({});
     navigate("users");
   };
 

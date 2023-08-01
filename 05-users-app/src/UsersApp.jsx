@@ -1,7 +1,6 @@
 import { LoginPage } from "./auth/pages/LoginPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { UserRoutes } from "./components/UserRoutes";
-import { AuthProvider } from "./auth/context/AuthProvider";
 import { useContext } from "react";
 import { AuthContext } from "./auth/context/AuthContext";
 

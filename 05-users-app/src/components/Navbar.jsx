@@ -33,11 +33,14 @@ export const Navbar = () => {
                 Users
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to={"users/register"}>
-                Register user
-              </NavLink>
-            </li>
+            {
+              login.admin &&
+              <li className="nav-item">
+                <NavLink className="nav-link" to={"users/register"}>
+                  Register user
+                </NavLink>
+              </li>
+            }
           </ul>
         </div>
       </div>

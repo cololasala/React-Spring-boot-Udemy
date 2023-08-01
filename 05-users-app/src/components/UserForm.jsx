@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 
 export const UserForm = ({ userUpdate, closeForm }) => {
-  const { initForm, addUser } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos 
+  const { initForm, addUser, errors, setErrors } = useContext(UserContext); // usamos el context y desde alli sacamos lo que necesitamos
   const [formData, setFormData] = useState(initForm);
-  const { id, userName, email, password } = formData;
+  const { id, username, email, password, admin } = formData;
+  const [checked, setChecked] = useState(admin);
 
   useEffect(() => {
+    setErrors({}); //al iniciar saco los errors del form
     setFormData(userUpdate);
   }, [userUpdate]);
 
@@ -15,29 +17,34 @@ export const UserForm = ({ userUpdate, closeForm }) => {
     setFormData((oldValue) => ({ ...oldValue, [name]: value }));
   };
 
+  const onCheckedChange = (e) => {
+    const { checked, name } = e.target;
+    setChecked(checked);
+    setFormData((oldValue) => ({ ...oldValue, [name]: checked }));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     addUser(formData);
-    setFormData(initForm);
-    closeForm();
   };
 
-  const isDisabled = () => {
-    return !userName || !email || (id === 0 && !password);
-  };
+  /* const isDisabled = () => {
+    return !username || !email || (id === 0 && !password);
+  }; */
 
   return (
     <>
+      {/* se quita required de inputs y isDisabled para mostrar errores de back */}
       <form onSubmit={onSubmit}>
         <input
           type="text"
           className="form-control mb-1"
-          name="userName"
-          value={userName || ""}
+          name="username"
+          value={username || ""}
           onChange={onInputChange}
-          placeholder="Username"
-          required
+          placeholder="username"
         />
+        <small className="text-danger">{errors?.username}</small>
         <input
           type="email"
           className="form-control mb-1"
@@ -45,18 +52,31 @@ export const UserForm = ({ userUpdate, closeForm }) => {
           value={email || ""}
           onChange={onInputChange}
           placeholder="Email"
-          required
         />
-        {id === 0 && (
+        <div className="my-3 form-check">
+          <label className="form-check-label">Admin</label>
           <input
-            type="password"
-            className="form-control mb-1"
-            name="password"
-            value={password || ""}
-            onChange={onInputChange}
-            placeholder="Password"
-            required
+            type="checkbox"
+            className="form-check-input"
+            id="admin"
+            name="admin"
+            checked={admin}
+            onChange={onCheckedChange}
           />
+        </div>
+        <small className="text-danger">{errors?.email}</small>
+        {id === 0 && (
+          <>
+            <input
+              type="password"
+              className="form-control mb-1"
+              name="password"
+              value={password || ""}
+              onChange={onInputChange}
+              placeholder="Password"
+            />
+            <small className="text-danger">{errors?.password}</small>
+          </>
         )}
         {/* type hidden para no actualizar id */}
         <input type="hidden" name="id" value={id || ""} />
@@ -71,8 +91,8 @@ export const UserForm = ({ userUpdate, closeForm }) => {
           <button
             type="submit"
             className="primary-button"
-            style={{ opacity: isDisabled() ? 0.65 : 1 }}
-            disabled={isDisabled()}
+          /* style={{ opacity: isDisabled() ? 0.65 : 1 }}
+      disabled={isDisabled()} */
           >
             {id !== 0 ? "Update" : "Create"}
           </button>

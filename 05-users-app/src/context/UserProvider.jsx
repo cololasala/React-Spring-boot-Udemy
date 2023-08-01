@@ -10,6 +10,13 @@ export const UserProvider = ({ children }) => { //en el provider decimos que ten
     removeUser,
     onUpdate,
     setSelectedUser,
+    getUsers,
+    setErrors,
+    errors,
+    openModal,
+    setOpenModal,
+    onCloseModal,
+    loading
   } = useUsers(); //hook encargado de manejar los usuarios de la app
 
   return (
@@ -22,6 +29,13 @@ export const UserProvider = ({ children }) => { //en el provider decimos que ten
         removeUser,
         onUpdate,
         setSelectedUser,
+        getUsers,
+        setErrors,
+        errors,
+        openModal,
+        setOpenModal,
+        onCloseModal,
+        loading
       }}
     >
       {children}
