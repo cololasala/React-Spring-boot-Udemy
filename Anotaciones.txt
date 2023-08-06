@@ -29,3 +29,13 @@ Pasos para crear un context:
 3-Con el tag UserProvider engrapamos todos los componentes hijos, en este caso sera en UsersRoutes (que es el componente de mayor jerarquia).
 4-A partir de ahora todos los componentes engrapados tendran acceso a lo que habiamos puesto en el "value" del UserProvider.
 5-La manera de acceder es mediante el hook useContext pasandole el context creado en este caso -> useContext(UserContext).
+
+----------------------------------------------
+Redux: es un patron de arquitectura que utiliza reducers para manejar el estado de nuestra app.
+Usamos -> npm install @reduxjs/toolkit npm install react-redux
+
+Pasos para crear un redux:
+1-Creamos un store(unica fuente de verdad), y usamos Provider de react-redux para compartir el store.
+2-Se crean slices
+3-Agregamos los slices al store
+4-Usamos useSelector para obtener cosas del estado de nuestro slice (segun el nombre del slice, "auth" o "users").
