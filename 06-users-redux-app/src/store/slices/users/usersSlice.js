@@ -21,6 +21,8 @@ export const usersSlice = createSlice({
     userSelected: initForm,
     openModal: false,
     errors: initialErrors,
+    isLoading: true,
+    paginator: {}
   },
   reducers: {
     //todo lo que esta dentro de reducers serian cada una de las funciones que teniamos en el usersReducers, estas funciones se llaman actions
@@ -52,7 +54,9 @@ export const usersSlice = createSlice({
       state.openModal = false;
     },
     loadingUsersAction: (state, action) => {
-      state.users = action.payload;
+      state.users = action.payload.content;   //usando paginacion la data viene en content
+      state.paginator = action.payload; // el paginator tendrar todo lo que retorna el metodo
+      state.isLoading = false;
     },
     onOpenModalAction: (state) => {
       state.openModal = true;

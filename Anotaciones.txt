@@ -39,3 +39,11 @@ Pasos para crear un redux:
 2-Se crean slices
 3-Agregamos los slices al store
 4-Usamos useSelector para obtener cosas del estado de nuestro slice (segun el nombre del slice, "auth" o "users").
+
+----------------------------------------------
+Amazon AWS
+
+Los servicios que se usan son:
+Amazon RDS -> para alojar la BD
+EC2 -> para back
+S3 -> para front

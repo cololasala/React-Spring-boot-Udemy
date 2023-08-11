@@ -17,6 +17,11 @@ export const UserRoutes = () => {
             <UsersPage />
           }
         />
+        <Route
+          path="users/:page"
+          element={
+            <UsersPage />
+          } />
         {
           admin &&
           <>

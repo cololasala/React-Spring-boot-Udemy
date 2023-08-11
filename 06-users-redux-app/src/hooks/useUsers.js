@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUser,
-  findAll,
+  findAllByPages,
   saveUser,
   updateUser,
 } from "../services/userService";
@@ -18,25 +18,29 @@ import {
   setErrorsAction,
   updateUserAction,
 } from "../store/slices/users/usersSlice";
+import { onLogout } from "../store/slices/auth/authSlice";
+import { useAuth } from "../auth/hooks/useAuth";
 
 const initialUsers = [];
 
 export const useUsers = () => {
   const dispatch = useDispatch(); //utilizamos el dispath de react-redux
-  const { users, selectedUser, openModal, errors } = useSelector(
+  const { users, selectedUser, openModal, errors, isLoading } = useSelector(
     (state) => state.users,
   ); // obtenemos la data con useSelector
   const { admin } = useSelector((state) => state.auth);
+  const { handleLogout } = useAuth();
   const navigate = useNavigate();
 
-  const getUsers = async () => {
+  const getUsers = async (page = 0) => {
     try {
-      const result = await findAll();
+      const result = await findAllByPages(page);
       dispatch(loadingUsersAction(result.data)); //con dispatch llamamos a la action loadingUsers y le pasamos como payload la data de axios
     } catch (error) {
       if (error.response?.status === 401) {
         handleLogout();
       } else {
+        console.log("error en paginacion")
         console.warn(error);
       }
     }
@@ -158,5 +162,6 @@ export const useUsers = () => {
     onOpenModal,
     onCloseModal,
     setErrors,
+    isLoading,
   };
 };

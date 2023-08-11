@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { authService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { onLogin, onLogout } from "../../store/slices/auth/authSlice";
+import { onLogin, onLoginLoading, onLogout } from "../../store/slices/auth/authSlice";
 
 export const useAuth = () => {
   const { user, admin, isAuth } = useSelector(state => state.auth); //obtenemos del state del slice "auth"
@@ -11,6 +11,7 @@ export const useAuth = () => {
 
   const handleLogin = async (user) => {
     try {
+      dispatch(onLoginLoading(true)); //login spinner en true
       const response = await authService(user);
 
       const token = response.data.token;
@@ -28,6 +29,7 @@ export const useAuth = () => {
       } else {
         throw error;
       }
+      dispatch(onLoginLoading(false)); //login spinner en false si es que falla el login
     }
   };
 

@@ -18,6 +18,15 @@ export const findAll = async () => {
   }
 };
 
+export const findAllByPages = async (page = 0) => {
+  try {
+    const response = await usersApi.get(`/users/${page}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const saveUser = async (user) => {
   try {
     const response = await usersApi.post(`/user`, user);
